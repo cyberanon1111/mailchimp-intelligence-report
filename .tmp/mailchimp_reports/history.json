@@ -1,0 +1,40 @@
+[
+  {
+    "run_at": "2026-09-18T11:50:32+00:00",
+    "report_date": "2026-09-18",
+    "window_days": 30,
+    "current_period": {
+      "campaigns_count": 1,
+      "recipients": 370,
+      "delivered": 346,
+      "opens_total": 272,
+      "unique_opens": 155,
+      "open_rate": 0.4479768786127168,
+      "clicks_total": 527,
+      "unique_clicks": 48,
+      "click_rate": 0.13872832369942195,
+      "click_to_open_rate": 0.3096774193548387,
+      "unsubscribes": 0,
+      "unsubscribe_rate": 0.0,
+      "bounces": 24,
+      "bounce_rate": 0.06486486486486487
+    },
+    "previous_period": {
+      "campaigns_count": 9,
+      "recipients": 305,
+      "delivered": 270,
+      "opens_total": 190,
+      "unique_opens": 107,
+      "open_rate": 0.3962962962962963,
+      "clicks_total": 114,
+      "unique_clicks": 18,
+      "click_rate": 0.06666666666666667,
+      "click_to_open_rate": 0.16822429906542055,
+      "unsubscribes": 0,
+      "unsubscribe_rate": 0.0,
+      "bounces": 35,
+      "bounce_rate": 0.11475409836065574
+    },
+    "status": "OK"
+  }
+]
