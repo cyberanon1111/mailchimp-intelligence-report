@@ -1,0 +1,15 @@
+.env
+__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store
+
+# Per-run generated report output (HTML/PDF/charts/JSON) — regenerated fresh
+# every run, not worth versioning.
+.tmp/mailchimp_reports/20*/
+.tmp/mailchimp_reports/logs/
+
+# NOTE: .tmp/mailchimp_reports/engagement/*.json and history.json are
+# intentionally NOT ignored — the daily workflow commits them back to the
+# repo so incremental fetching and cross-campaign history persist between
+# CI runs (GitHub Actions runners are ephemeral).

@@ -1,0 +1,63 @@
+name: Daily Mailchimp Engagement Report
+
+on:
+  schedule:
+    # 03:30 UTC = 09:00 IST, daily
+    - cron: "30 3 * * *"
+  workflow_dispatch: {}   # allows a manual "Run workflow" test from the Actions tab
+
+permissions:
+  contents: write   # needed to commit the updated engagement state back to the repo
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install system libraries required by weasyprint (PDF rendering)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            libpango-1.0-0 libpangocairo-1.0-0 libgdk-pixbuf2.0-0 \
+            libffi-dev shared-mime-info fonts-liberation
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Generate and send the report
+        env:
+          MAILCHIMP_API_KEY: ${{ secrets.MAILCHIMP_API_KEY }}
+          MAILCHIMP_SERVER: ${{ secrets.MAILCHIMP_SERVER }}
+          MAILCHIMP_AUDIENCE_ID: ${{ secrets.MAILCHIMP_AUDIENCE_ID }}
+          REPORT_RECIPIENTS: ${{ secrets.REPORT_RECIPIENTS }}
+          REPORT_FROM_EMAIL: ${{ secrets.REPORT_FROM_EMAIL }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          SMTP_USE_TLS: ${{ secrets.SMTP_USE_TLS }}
+          TEST_MODE: ${{ secrets.TEST_MODE }}
+        run: python3 tools/generate_mailchimp_report.py --send
+
+      - name: Upload this run's report as a downloadable artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mailchimp-report-${{ github.run_id }}
+          path: .tmp/mailchimp_reports/20*/
+          retention-days: 30
+          if-no-files-found: ignore
+
+      - name: Persist engagement state back to the repo
+        if: always()
+        run: |
+          git config user.name "mailchimp-report-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add .tmp/mailchimp_reports/engagement/ .tmp/mailchimp_reports/history.json
+          git diff --cached --quiet || git commit -m "Update engagement state [skip ci]"
+          git push

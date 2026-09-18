@@ -1,0 +1,9 @@
+# Dependencies for the daily Mailchimp reporting pipeline (tools/generate_mailchimp_report.py
+# and friends). The rest of this repo's tools/ scripts install their own deps ad hoc; this file
+# only covers the reporting pipeline added for that feature.
+requests>=2.32
+python-dotenv>=1.2
+Markdown>=3.9
+matplotlib>=3.9
+weasyprint>=66.0
+pytest>=8.4
