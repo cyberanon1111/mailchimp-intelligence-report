@@ -74,5 +74,43 @@
       "bounce_rate": 0.11475409836065574
     },
     "status": "OK"
+  },
+  {
+    "run_at": "2026-09-19T08:14:48+00:00",
+    "report_date": "2026-09-19",
+    "window_days": 30,
+    "current_period": {
+      "campaigns_count": 2,
+      "recipients": 718,
+      "delivered": 691,
+      "opens_total": 436,
+      "unique_opens": 256,
+      "open_rate": 0.3704775687409551,
+      "clicks_total": 620,
+      "unique_clicks": 62,
+      "click_rate": 0.08972503617945007,
+      "click_to_open_rate": 0.2421875,
+      "unsubscribes": 0,
+      "unsubscribe_rate": 0.0,
+      "bounces": 27,
+      "bounce_rate": 0.037604456824512536
+    },
+    "previous_period": {
+      "campaigns_count": 9,
+      "recipients": 305,
+      "delivered": 270,
+      "opens_total": 190,
+      "unique_opens": 107,
+      "open_rate": 0.3962962962962963,
+      "clicks_total": 114,
+      "unique_clicks": 18,
+      "click_rate": 0.06666666666666667,
+      "click_to_open_rate": 0.16822429906542055,
+      "unsubscribes": 0,
+      "unsubscribe_rate": 0.0,
+      "bounces": 35,
+      "bounce_rate": 0.11475409836065574
+    },
+    "status": "OK"
   }
 ]
